@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public delegate void IntDelegate(int x);
+    public event IntDelegate PointsChanged;
+    //public event EmptyDelegate EndGame;
+
+
     [SerializeField] private Rigidbody2D _playerRigidbody;
-    
-    private int _currentScore;
-    private int _highscore;
+
+    private int _score = 0;
 
 
     // Start is called before the first frame update
@@ -23,6 +27,22 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _playerRigidbody.velocity = Vector3.up * 3;
+        }
+
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PointZone"))
+        {
+            _score++;
+
+            PointsChanged?.Invoke(_score); //tell relelvant systems
+        }
+
+        if (other.CompareTag("Pipe"))
+        {
+            //EndGame?.Invoke();
         }
     }
 }

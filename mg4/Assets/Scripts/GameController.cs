@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Locator.Instance.Player.EndGame += StopGame;
+
+
         // first pipe spawn
         Instantiate(_pipePrefabs[Random.Range(0, 4)], _grid.transform);
 
@@ -22,6 +25,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // constantly spawn pipes
         _timeToSpawn -= Time.deltaTime;
 
         if (_timeToSpawn <= 0)
@@ -31,5 +35,10 @@ public class GameController : MonoBehaviour
             int ran = Random.Range(0, 4);
             Instantiate(_pipePrefabs[ran], _grid.transform);
         }
+
+
+
     }
+
+    
 }

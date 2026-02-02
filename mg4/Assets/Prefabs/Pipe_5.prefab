@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4164517874246719834}
   m_Layer: 0
   m_Name: Pipe_5
-  m_TagString: Untagged
+  m_TagString: Pipe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -337,5 +337,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1bc5cda62bb6e34fb7b9c7e9b59877e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pointZonePrefab: {fileID: 8507820053574211351, guid: 6219524683007cc4e88467ee56b62e93, type: 3}
   _pipeTransform: {fileID: 0}
-  _pipeCollider: {fileID: 0}

@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Locator : MonoBehaviour
+{
+    public static Locator Instance { get; private set; }
+    public Player Player { get; private set; }
+
+    private void Awake()
+    {
+        // prevents multiple Locator instances from existing
+        if (Instance != null && Instance != this) 
+        {
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+
+        // creates reference to Player object and component
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        Player = playerObj.GetComponent<Player>();
+    }
+
+}
