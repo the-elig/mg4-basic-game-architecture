@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D _playerRigidbody;
 
     private int _score = 0;
-    public static bool _gameRunning = true;
+    private bool _gameRunning = true;
 
 
     // Start is called before the first frame update

@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject[] _pipePrefabs;
     private float _spawnGap, _timeToSpawn;
 
-    private bool _gameRunning = true;
+    private bool _gameRunning = true; //i know this is bad game design, i don't care
 
     // Start is called before the first frame update
     void Start()
