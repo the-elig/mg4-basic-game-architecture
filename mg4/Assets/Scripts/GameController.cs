@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject[] _pipePrefabs;
     private float _spawnGap, _timeToSpawn;
 
+    private bool _gameRunning = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        //Locator.Instance.Player.EndGame += StopGame;
+        Locator.Instance.Player.EndGame += StopGame;
 
 
         // first pipe spawn
@@ -25,20 +28,28 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // constantly spawn pipes
-        _timeToSpawn -= Time.deltaTime;
-
-        if (_timeToSpawn <= 0)
+        if (_gameRunning)
         {
-            _timeToSpawn = _spawnGap;
+            // constantly spawn pipes
+            _timeToSpawn -= Time.deltaTime;
 
-            int ran = Random.Range(0, 4);
-            Instantiate(_pipePrefabs[ran], _grid.transform);
+            if (_timeToSpawn <= 0)
+            {
+                _timeToSpawn = _spawnGap;
+
+                int ran = Random.Range(0, 4);
+                Instantiate(_pipePrefabs[ran], _grid.transform);
+            }
         }
-
-
-
     }
 
-    
+    private void StopGame(int score)
+    {
+        _gameRunning = false;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

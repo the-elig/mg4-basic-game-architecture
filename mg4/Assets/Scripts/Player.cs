@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public delegate void IntDelegate(int x);
     public event IntDelegate PointsChanged;
-    //public event EmptyDelegate EndGame;
+    public event IntDelegate EndGame;
 
 
     [SerializeField] private Rigidbody2D _playerRigidbody;
@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
         {
             _playerRigidbody.velocity = Vector3.up * 3;
         }
-
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -36,13 +35,12 @@ public class Player : MonoBehaviour
         if (other.CompareTag("PointZone"))
         {
             _score++;
-
-            PointsChanged?.Invoke(_score); //tell relelvant systems
+            PointsChanged?.Invoke(_score); 
         }
 
         if (other.CompareTag("Pipe"))
         {
-            //EndGame?.Invoke();
+            EndGame?.Invoke(_score);
         }
     }
 }
