@@ -16,7 +16,6 @@ public class GameController : MonoBehaviour
     {
         Locator.Instance.Player.EndGame += StopGame;
 
-
         // first pipe spawn
         Instantiate(_pipePrefabs[Random.Range(0, 4)], _grid.transform);
 

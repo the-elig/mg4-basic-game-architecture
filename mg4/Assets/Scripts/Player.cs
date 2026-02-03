@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D _playerRigidbody;
 
     private int _score = 0;
+    public static bool _gameRunning = true;
 
 
     // Start is called before the first frame update
@@ -32,15 +33,20 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("PointZone"))
+        if (_gameRunning)
         {
-            _score++;
-            PointsChanged?.Invoke(_score); 
-        }
 
-        if (other.CompareTag("Pipe"))
-        {
-            EndGame?.Invoke(_score);
+            if (other.CompareTag("PointZone"))
+            {
+                _score++;
+                PointsChanged?.Invoke(_score);
+            }
+
+            if (other.CompareTag("Pipe"))
+            {
+                _gameRunning = false;
+                EndGame?.Invoke(_score);
+            }
         }
     }
 }
